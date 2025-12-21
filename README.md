@@ -11,6 +11,7 @@ This application allows you to check if a given number is:
 -   **Armstrong Number**: The sum of its own digits, each raised to the power of the number of digits (e.g., 153).
 -   **Pronic Number**: The product of two consecutive integers (e.g., 42 = 6 * 7).
 -   **Perfect Number**: The sum of its proper divisors equals the number itself (e.g., 28).
+-   **Happy Number**: A number which eventually reaches 1 when replaced by the sum of the square of its digits (e.g., 19).
 -   **Prime Number**: A number greater than 1 with only two factors: 1 and itself (e.g., 7).
 
 It can also perform the following calculations:
