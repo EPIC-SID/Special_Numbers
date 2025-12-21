@@ -3,13 +3,15 @@ import java.util.*;
 class Special_Numbers {
     public static Scanner sv = new Scanner(System.in);
 
-    // region: --- Logic Methods (for testing) ---
-
     public static boolean isPallindrome(int num) {
-        if (num < 0) return false;
+        if (num < 0)
+            return false;
         int n = num;
         int r = 0;
         while (num > 0) {
+            int a = 0;
+            a += num;
+            System.out.println(a);
             int m = num % 10;
             num = num / 10;
             r = r * 10 + m;
@@ -18,8 +20,10 @@ class Special_Numbers {
     }
 
     public static boolean isSpy(int n) {
-        if (n < 0) return false;
-        if (n == 0) return true; // A sum of 0 and product of 0 are equal
+        if (n < 0)
+            return false;
+        if (n == 0)
+            return true; // A sum of 0 and product of 0 are equal
 
         int sum = 0;
         int pro = 1;
@@ -34,7 +38,8 @@ class Special_Numbers {
     }
 
     public static boolean isArmstrong(long num) {
-        if (num < 0) return false;
+        if (num < 0)
+            return false;
         long o_n = num;
         long s_o_p = 0;
         String s = Long.toString(num);
@@ -54,7 +59,8 @@ class Special_Numbers {
     }
 
     public static boolean isPronic(int n) {
-        if (n < 0) return false;
+        if (n < 0)
+            return false;
         for (int i = 0; i * (i + 1) <= n; i++) {
             if (i * (i + 1) == n) {
                 return true;
@@ -64,12 +70,13 @@ class Special_Numbers {
     }
 
     public static boolean isPerfect(int num) {
-        if (num <= 1) return false;
-        int sum = 1; // Start with 1 as all numbers are divisible by 1
+        if (num <= 1)
+            return false;
+        int sum = 1; 
         for (int i = 2; i * i <= num; i++) {
             if (num % i == 0) {
                 sum += i;
-                if(i * i != num) {
+                if (i * i != num) {
                     sum += num / i;
                 }
             }
@@ -78,9 +85,12 @@ class Special_Numbers {
     }
 
     public static boolean isPrime(int num) {
-        if (num <= 1) return false;
-        if (num <= 3) return true;
-        if (num % 2 == 0 || num % 3 == 0) return false;
+        if (num <= 1)
+            return false;
+        if (num <= 3)
+            return true;
+        if (num % 2 == 0 || num % 3 == 0)
+            return false;
         for (int i = 5; i * i <= num; i = i + 6) {
             if (num % i == 0 || num % (i + 2) == 0) {
                 return false;
@@ -90,18 +100,20 @@ class Special_Numbers {
     }
 
     public static long calculateFactorial(int n) {
-        if (n < 0) return -1; // Or throw an exception
-        if (n == 0) return 1;
+        if (n < 0)
+            return -1;
+        if (n == 0)
+            return 1;
         long pro = 1;
         for (long i = 1; i <= n; i++) {
             pro = pro * i;
         }
         return pro;
     }
-    
+
     public static double calculateMedian(double[] array) {
         if (array == null || array.length == 0) {
-            return 0.0; // Or throw an exception
+            return 0.0;
         }
         Arrays.sort(array);
         int n = array.length;
@@ -115,10 +127,6 @@ class Special_Numbers {
         }
     }
 
-    // endregion
-
-    // region: --- I/O Methods (interacting with user) ---
-
     private static int getIntInput() {
         while (true) {
             try {
@@ -130,7 +138,7 @@ class Special_Numbers {
             }
         }
     }
-    
+
     private static long getLongInput() {
         while (true) {
             try {
@@ -174,7 +182,7 @@ class Special_Numbers {
             System.out.println(n + " is not a spy number.");
         }
     }
-
+    
     private static void Armstrong() {
         System.out.print("Enter any number : ");
         long num = getLongInput();
@@ -204,6 +212,30 @@ class Special_Numbers {
             System.out.println(num + " is not a Perfect Number.");
         }
     }
+    
+    private static void Happy() {
+        System.out.print("Enter any number : ");
+        int num = getIntInput();
+        Set<Integer> seen = new HashSet<>();
+        int n = num;
+
+        while (n != 1 && !seen.contains(n)) {
+            seen.add(n);
+            int sum = 0;
+            while (n > 0) {
+                int digit = n % 10;
+                sum += digit * digit;
+                n /= 10;
+            }
+            n = sum;
+        }
+
+        if (n == 1) {
+            System.out.println(num + " is a Happy Number.");
+        } else {
+            System.out.println(num + " is not a Happy Number.");
+        }
+    }
 
     private static void Prime() {
         System.out.print("Enter any number : ");
@@ -224,7 +256,7 @@ class Special_Numbers {
             System.out.println("Factorial of " + n + " is " + result);
         }
     }
-    
+
     private static double[] getDoubleArray(int n) {
         double[] array = new double[n];
         for (int i = 0; i < n; i++) {
@@ -246,12 +278,15 @@ class Special_Numbers {
         int ch = getIntInput();
         int n;
 
-        switch(ch) {
+        switch (ch) {
             case 1: // Mean
                 System.out.print("Enter the number of observations : ");
                 n = getIntInput();
-                if (n <= 0) { System.out.println("Number of values must be positive."); return; }
-                
+                if (n <= 0) {
+                    System.out.println("Number of values must be positive.");
+                    return;
+                }
+
                 double[] arrayMean = getDoubleArray(n);
                 double sum = 0;
                 for (double val : arrayMean) {
@@ -264,7 +299,10 @@ class Special_Numbers {
             case 2: // Median
                 System.out.print("Enter the number of values to be entered : ");
                 n = getIntInput();
-                if (n <= 0) { System.out.println("Number of values must be positive."); return; }
+                if (n <= 0) {
+                    System.out.println("Number of values must be positive.");
+                    return;
+                }
 
                 double[] arrayMedian = getDoubleArray(n);
                 Arrays.sort(arrayMedian);
@@ -276,7 +314,10 @@ class Special_Numbers {
             case 3: // Both
                 System.out.print("Enter the number of values to be entered : ");
                 n = getIntInput();
-                if (n <= 0) { System.out.println("Number of values must be positive."); return; }
+                if (n <= 0) {
+                    System.out.println("Number of values must be positive.");
+                    return;
+                }
 
                 double[] arrayBoth = getDoubleArray(n);
                 double sumBoth = 0;
@@ -291,7 +332,7 @@ class Special_Numbers {
                 double medianBoth = calculateMedian(arrayBoth);
                 System.out.println("The median is " + medianBoth);
                 break;
-                
+
             default:
                 System.out.println("Invalid Choice");
         }
@@ -310,17 +351,16 @@ class Special_Numbers {
         System.out.println("3. Armstrong Number (153 : 1^3 + 5^3 + 3^3 = 153 )");
         System.out.println("4. Pronic Number (42 : 6*7 = 42) ");
         System.out.println("5. Perfect Number (28) ");
-        System.out.println("6. Prime Number (7) ");
-        System.out.println("7. Factorial ");
-        System.out.println("8. Mean and Median");
-        System.out.println("9. Exit\n");
+        System.out.println("6. Happy Number (19 : 1^2 + 9^2 = 82 -> 8^2 + 2^2 = 68 -> ... -> 1)");
+        System.out.println("7. Prime Number (7) ");
+        System.out.println("8. Factorial ");
+        System.out.println("9. Mean and Median");
+        System.out.println("10. Exit\n");
         System.out.println("==============================");
 
         System.out.print("Enter your choice : ");
     }
 
-    //endregion
-    
     public static void main(String[] args) {
         while (true) {
             Display_Menu();
@@ -342,15 +382,18 @@ class Special_Numbers {
                     Perfect();
                     break;
                 case 6:
-                    Prime();
+                    Happy();
                     break;
                 case 7:
-                    Factorial();
+                    Prime();
                     break;
                 case 8:
-                    Mean_Median();
+                    Factorial();
                     break;
                 case 9:
+                    Mean_Median();
+                    break;
+                case 10:
                     Exit();
                     return;
                 default:
