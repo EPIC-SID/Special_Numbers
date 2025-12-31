@@ -136,27 +136,53 @@ class Special_Numbers {
         }
     }
     
-    public static List<Double> calculateMode(double[] array) {
+    public static void printMode(double[] array) {
         if (array == null || array.length == 0) {
-            return new ArrayList<>();
-        }
-        Map<Double, Integer> frequencyMap = new HashMap<>();
-        int maxFrequency = 0;
-        for (double num : array) {
-            int count = frequencyMap.getOrDefault(num, 0) + 1;
-            frequencyMap.put(num, count);
-            maxFrequency = Math.max(maxFrequency, count);
+            System.out.println("No data provided.");
+            return;
         }
 
-        List<Double> modes = new ArrayList<>();
-        if (maxFrequency > 1) { // Mode only makes sense if a number appears more than once
-            for (Map.Entry<Double, Integer> entry : frequencyMap.entrySet()) {
-                if (entry.getValue() == maxFrequency) {
-                    modes.add(entry.getKey());
-                }
+        Arrays.sort(array);
+        int maxFreq = 0;
+        int currentFreq = 1;
+
+        // Find the maximum frequency
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] == array[i - 1]) {
+                currentFreq++;
+            } else {
+                if (currentFreq > maxFreq) maxFreq = currentFreq;
+                currentFreq = 1;
             }
         }
-        return modes;
+        if (currentFreq > maxFreq) maxFreq = currentFreq;
+
+        if (maxFreq <= 1) {
+            System.out.println("No Mode found (all values unique).");
+            return;
+        }
+
+        // Print all values that have the maximum frequency
+        System.out.print("Mode: ");
+        currentFreq = 1;
+        boolean first = true;
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] == array[i - 1]) {
+                currentFreq++;
+            } else {
+                if (currentFreq == maxFreq) {
+                    if (!first) System.out.print(", ");
+                    System.out.print(array[i - 1]);
+                    first = false;
+                }
+                currentFreq = 1;
+            }
+        }
+        if (currentFreq == maxFreq) {
+            if (!first) System.out.print(", ");
+            System.out.print(array[array.length - 1]);
+        }
+        System.out.println();
     }
 
     private static int getIntInput() {
@@ -245,24 +271,28 @@ class Special_Numbers {
         }
     }
     
+    private static int getNextHappy(int n) {
+        int sum = 0;
+        while (n > 0) {
+            int digit = n % 10;
+            sum += digit * digit;
+            n /= 10;
+        }
+        return sum;
+    }
+
     private static void Happy() {
         System.out.print("Enter any number : ");
         int num = getIntInput();
-        Set<Integer> seen = new HashSet<>();
-        int n = num;
+        int slow = num;
+        int fast = getNextHappy(num);
 
-        while (n != 1 && !seen.contains(n)) {
-            seen.add(n);
-            int sum = 0;
-            while (n > 0) {
-                int digit = n % 10;
-                sum += digit * digit;
-                n /= 10;
-            }
-            n = sum;
+        while (fast != 1 && slow != fast) {
+            slow = getNextHappy(slow);
+            fast = getNextHappy(getNextHappy(fast));
         }
 
-        if (n == 1) {
+        if (fast == 1) {
             System.out.println(num + " is a Happy Number.");
         } else {
             System.out.println(num + " is not a Happy Number.");
@@ -434,9 +464,7 @@ class Special_Numbers {
                 break;
 
             case 3: // Mode
-                List<Double> modes = calculateMode(array);
-                if (modes.isEmpty()) System.out.println("No Mode found (all values unique).");
-                else System.out.println("Mode: " + modes);
+                printMode(array);
                 break;
 
             case 4: // All
@@ -451,9 +479,7 @@ class Special_Numbers {
                 System.out.println("Median: " + calculateMedian(array));
 
                 // Mode
-                List<Double> modesAll = calculateMode(array);
-                if (modesAll.isEmpty()) System.out.println("No Mode found (all values unique).");
-                else System.out.println("Mode: " + modesAll);
+                printMode(array);
                 break;
 
             default:
