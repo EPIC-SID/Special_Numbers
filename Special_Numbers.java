@@ -99,6 +99,15 @@ class Special_Numbers {
         return true;
     }
 
+    public static boolean isUgly(int n) {
+        if (n <= 0)
+            return false;
+        while (n % 2 == 0) n /= 2;
+        while (n % 3 == 0) n /= 3;
+        while (n % 5 == 0) n /= 5;
+        return n == 1;
+    }
+
     public static long calculateFactorial(int n) {
         if (n < 0)
             return -1;
@@ -246,6 +255,16 @@ class Special_Numbers {
             System.out.println(num + " is not a Prime Number.");
     }
 
+    private static void Ugly() {
+        System.out.print("Enter any number : ");
+        int n = getIntInput();
+        if (isUgly(n)) {
+            System.out.println(n + " is an Ugly Number.");
+        } else {
+            System.out.println(n + " is not an Ugly Number.");
+        }
+    }
+
     private static void Factorial() {
         System.out.print("Enter the number of which you want factorial : ");
         int n = getIntInput();
@@ -255,6 +274,24 @@ class Special_Numbers {
         } else {
             System.out.println("Factorial of " + n + " is " + result);
         }
+    }
+
+    private static void Fibonacci() {
+        System.out.print("Enter the number of terms for Fibonacci sequence: ");
+        int n = getIntInput();
+        if (n <= 0) {
+            System.out.println("Number of terms must be positive.");
+            return;
+        }
+        long a = 0, b = 1;
+        System.out.print("Fibonacci Sequence: ");
+        for (int i = 1; i <= n; i++) {
+            System.out.print(a + (i == n ? "" : ", "));
+            long next = a + b;
+            a = b;
+            b = next;
+        }
+        System.out.println();
     }
 
     private static double[] getDoubleArray(int n) {
@@ -355,7 +392,9 @@ class Special_Numbers {
         System.out.println("7. Prime Number (7) ");
         System.out.println("8. Factorial ");
         System.out.println("9. Mean and Median");
-        System.out.println("10. Exit\n");
+        System.out.println("10. Fibonacci Sequence");
+        System.out.println("11. Ugly Number");
+        System.out.println("12. Exit\n");
         System.out.println("==============================");
 
         System.out.print("Enter your choice : ");
@@ -394,6 +433,12 @@ class Special_Numbers {
                     Mean_Median();
                     break;
                 case 10:
+                    Fibonacci();
+                    break;
+                case 11:
+                    Ugly();
+                    break;
+                case 12:
                     Exit();
                     return;
                 default:
