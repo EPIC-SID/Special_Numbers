@@ -392,6 +392,34 @@ class Special_Numbers {
         System.out.println("LCM: " + calculateLCM(a, b));
     }
 
+    private static void GuessTheNumber() {
+        System.out.println("\n=== Guess the Number Game ===");
+        System.out.println("I have picked a number between 1 and 100.");
+        System.out.println("Try to guess it!");
+
+        int numberToGuess = (int) (Math.random() * 100) + 1;
+        int numberOfTries = 0;
+        int guess = 0;
+        boolean win = false;
+
+        while (!win) {
+            System.out.print("Enter your guess: ");
+            guess = getIntInput();
+            numberOfTries++;
+
+            if (guess == numberToGuess) {
+                win = true;
+            } else if (guess < numberToGuess) {
+                System.out.println("Too low! Try again.");
+            } else {
+                System.out.println("Too high! Try again.");
+            }
+        }
+
+        System.out.println("Congratulations! You guessed the number " + numberToGuess + " in " + numberOfTries + " tries.");
+        System.out.println("=============================\n");
+    }
+
     private static void Factorial() {
         System.out.print("Enter the number of which you want factorial : ");
         int n = getIntInput();
@@ -508,7 +536,8 @@ class Special_Numbers {
         System.out.println("11. Ugly Number");
         System.out.println("12. Number Conversion");
         System.out.println("13. GCD and LCM");
-        System.out.println("14. Exit\n");
+        System.out.println("14. Guess the Number Game");
+        System.out.println("15. Exit\n");
         System.out.println("==============================");
 
         System.out.print("Enter your choice : ");
@@ -559,6 +588,9 @@ class Special_Numbers {
                     GCD_LCM();
                     break;
                 case 14:
+                    GuessTheNumber();
+                    break;
+                case 15:
                     Exit();
                     return;
                 default:

@@ -22,6 +22,7 @@ It can also perform the following calculations:
 -   **Statistics**: Calculate Mean, Median, and Mode of a series of numbers.
 -   **Number Conversion**: Convert between Decimal, Binary, and Hexadecimal.
 -   **GCD and LCM**: Calculate the Greatest Common Divisor and Least Common Multiple of two numbers.
+-   **Guess the Number Game**: A mini-game to guess a random number between 1 and 100.
 
 ## How to Use
 
