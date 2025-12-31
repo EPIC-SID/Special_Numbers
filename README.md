@@ -21,6 +21,7 @@ It can also perform the following calculations:
 -   **Fibonacci Sequence**: Generates the first 'n' terms of the Fibonacci sequence.
 -   **Mean and Median**: Basic statistical calculations on a series of numbers.
 -   **Number Conversion**: Convert between Decimal, Binary, and Hexadecimal.
+-   **GCD and LCM**: Calculate the Greatest Common Divisor and Least Common Multiple of two numbers.
 
 ## How to Use
 

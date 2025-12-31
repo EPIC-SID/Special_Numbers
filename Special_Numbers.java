@@ -314,6 +314,31 @@ class Special_Numbers {
         }
     }
 
+    public static long calculateGCD(long a, long b) {
+        while (b > 0) {
+            a %= b;
+            long temp = a;
+            a = b;
+            b = temp;
+        }
+        return a;
+    }
+
+    public static long calculateLCM(long a, long b) {
+        if (a == 0 || b == 0) return 0;
+        return Math.abs(a * b) / calculateGCD(a, b);
+    }
+
+    private static void GCD_LCM() {
+        System.out.print("Enter first number: ");
+        long a = getLongInput();
+        System.out.print("Enter second number: ");
+        long b = getLongInput();
+
+        System.out.println("GCD: " + calculateGCD(a, b));
+        System.out.println("LCM: " + calculateLCM(a, b));
+    }
+
     private static void Factorial() {
         System.out.print("Enter the number of which you want factorial : ");
         int n = getIntInput();
@@ -444,7 +469,8 @@ class Special_Numbers {
         System.out.println("10. Fibonacci Sequence");
         System.out.println("11. Ugly Number");
         System.out.println("12. Number Conversion");
-        System.out.println("13. Exit\n");
+        System.out.println("13. GCD and LCM");
+        System.out.println("14. Exit\n");
         System.out.println("==============================");
 
         System.out.print("Enter your choice : ");
@@ -492,6 +518,9 @@ class Special_Numbers {
                     NumberConversion();
                     break;
                 case 13:
+                    GCD_LCM();
+                    break;
+                case 14:
                     Exit();
                     return;
                 default:
