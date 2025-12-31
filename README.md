@@ -20,6 +20,7 @@ It can also perform the following calculations:
 -   **Factorial**: The product of all positive integers up to a given number.
 -   **Fibonacci Sequence**: Generates the first 'n' terms of the Fibonacci sequence.
 -   **Mean and Median**: Basic statistical calculations on a series of numbers.
+-   **Number Conversion**: Convert between Decimal, Binary, and Hexadecimal.
 
 ## How to Use
 

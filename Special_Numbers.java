@@ -265,6 +265,55 @@ class Special_Numbers {
         }
     }
 
+    private static void NumberConversion() {
+        System.out.println("\n==============================");
+        System.out.println("Number Conversion Menu");
+        System.out.println("1. Decimal to Binary");
+        System.out.println("2. Decimal to Hexadecimal");
+        System.out.println("3. Binary to Decimal");
+        System.out.println("4. Hexadecimal to Decimal");
+        System.out.println("5. Back to Main Menu");
+        System.out.println("==============================\n");
+
+        System.out.print("Enter your choice : ");
+        int ch = getIntInput();
+
+        switch (ch) {
+            case 1:
+                System.out.print("Enter a Decimal number: ");
+                int dec = getIntInput();
+                System.out.println("Binary: " + Integer.toBinaryString(dec));
+                break;
+            case 2:
+                System.out.print("Enter a Decimal number: ");
+                int decHex = getIntInput();
+                System.out.println("Hexadecimal: " + Integer.toHexString(decHex).toUpperCase());
+                break;
+            case 3:
+                System.out.print("Enter a Binary number: ");
+                String bin = sv.next();
+                try {
+                    System.out.println("Decimal: " + Integer.parseInt(bin, 2));
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid Binary number.");
+                }
+                break;
+            case 4:
+                System.out.print("Enter a Hexadecimal number: ");
+                String hex = sv.next();
+                try {
+                    System.out.println("Decimal: " + Integer.parseInt(hex, 16));
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid Hexadecimal number.");
+                }
+                break;
+            case 5:
+                return;
+            default:
+                System.out.println("Invalid Choice");
+        }
+    }
+
     private static void Factorial() {
         System.out.print("Enter the number of which you want factorial : ");
         int n = getIntInput();
@@ -394,7 +443,8 @@ class Special_Numbers {
         System.out.println("9. Mean and Median");
         System.out.println("10. Fibonacci Sequence");
         System.out.println("11. Ugly Number");
-        System.out.println("12. Exit\n");
+        System.out.println("12. Number Conversion");
+        System.out.println("13. Exit\n");
         System.out.println("==============================");
 
         System.out.print("Enter your choice : ");
@@ -439,6 +489,9 @@ class Special_Numbers {
                     Ugly();
                     break;
                 case 12:
+                    NumberConversion();
+                    break;
+                case 13:
                     Exit();
                     return;
                 default:
