@@ -13,10 +13,12 @@ This application allows you to check if a given number is:
 -   **Perfect Number**: The sum of its proper divisors equals the number itself (e.g., 28).
 -   **Happy Number**: A number which eventually reaches 1 when replaced by the sum of the square of its digits (e.g., 19).
 -   **Prime Number**: A number greater than 1 with only two factors: 1 and itself (e.g., 7).
+-   **Ugly Number**: A positive integer whose prime factors are limited to 2, 3, and 5 (e.g., 6, 10).
 
 It can also perform the following calculations:
 
 -   **Factorial**: The product of all positive integers up to a given number.
+-   **Fibonacci Sequence**: Generates the first 'n' terms of the Fibonacci sequence.
 -   **Mean and Median**: Basic statistical calculations on a series of numbers.
 
 ## How to Use
