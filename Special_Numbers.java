@@ -135,6 +135,29 @@ class Special_Numbers {
             return (array[pos1] + array[pos2]) / 2.0;
         }
     }
+    
+    public static List<Double> calculateMode(double[] array) {
+        if (array == null || array.length == 0) {
+            return new ArrayList<>();
+        }
+        Map<Double, Integer> frequencyMap = new HashMap<>();
+        int maxFrequency = 0;
+        for (double num : array) {
+            int count = frequencyMap.getOrDefault(num, 0) + 1;
+            frequencyMap.put(num, count);
+            maxFrequency = Math.max(maxFrequency, count);
+        }
+
+        List<Double> modes = new ArrayList<>();
+        if (maxFrequency > 1) { // Mode only makes sense if a number appears more than once
+            for (Map.Entry<Double, Integer> entry : frequencyMap.entrySet()) {
+                if (entry.getValue() == maxFrequency) {
+                    modes.add(entry.getKey());
+                }
+            }
+        }
+        return modes;
+    }
 
     private static int getIntInput() {
         while (true) {
@@ -377,71 +400,60 @@ class Special_Numbers {
         return array;
     }
 
-    private static void Mean_Median() {
+    private static void Statistics() {
         System.out.println("\n==============================");
-        System.out.println("Mean and Median Calculation");
+        System.out.println("Statistics Calculation");
         System.out.println("1. Mean");
         System.out.println("2. Median");
-        System.out.println("3. Both Mean and Median");
+        System.out.println("3. Mode");
+        System.out.println("4. All (Mean, Median, Mode)");
         System.out.println("==============================\n");
 
         System.out.print("Enter your choice : ");
         int ch = getIntInput();
-        int n;
+        
+        System.out.print("Enter the number of observations : ");
+        int n = getIntInput();
+        if (n <= 0) {
+            System.out.println("Number of values must be positive.");
+            return;
+        }
+        double[] array = getDoubleArray(n);
 
         switch (ch) {
             case 1: // Mean
-                System.out.print("Enter the number of observations : ");
-                n = getIntInput();
-                if (n <= 0) {
-                    System.out.println("Number of values must be positive.");
-                    return;
-                }
-
-                double[] arrayMean = getDoubleArray(n);
                 double sum = 0;
-                for (double val : arrayMean) {
-                    sum += val;
-                }
-                double mean = sum / n;
-                System.out.println("Mean: " + mean);
+                for (double val : array) sum += val;
+                System.out.println("Mean: " + (sum / n));
                 break;
 
             case 2: // Median
-                System.out.print("Enter the number of values to be entered : ");
-                n = getIntInput();
-                if (n <= 0) {
-                    System.out.println("Number of values must be positive.");
-                    return;
-                }
-
-                double[] arrayMedian = getDoubleArray(n);
-                Arrays.sort(arrayMedian);
-                System.out.println("Data in ascending order:\n" + Arrays.toString(arrayMedian));
-                double median = calculateMedian(arrayMedian);
-                System.out.println("The median is " + median);
+                Arrays.sort(array); // Sorting is needed for Median
+                System.out.println("Data in ascending order:\n" + Arrays.toString(array));
+                System.out.println("Median: " + calculateMedian(array));
                 break;
 
-            case 3: // Both
-                System.out.print("Enter the number of values to be entered : ");
-                n = getIntInput();
-                if (n <= 0) {
-                    System.out.println("Number of values must be positive.");
-                    return;
-                }
+            case 3: // Mode
+                List<Double> modes = calculateMode(array);
+                if (modes.isEmpty()) System.out.println("No Mode found (all values unique).");
+                else System.out.println("Mode: " + modes);
+                break;
 
-                double[] arrayBoth = getDoubleArray(n);
-                double sumBoth = 0;
-                for (double val : arrayBoth) {
-                    sumBoth += val;
-                }
-                double meanBoth = sumBoth / n;
-                System.out.println("The mean of given data is " + meanBoth);
+            case 4: // All
+                // Mean
+                double sumAll = 0;
+                for (double val : array) sumAll += val;
+                System.out.println("Mean: " + (sumAll / n));
 
-                Arrays.sort(arrayBoth);
-                System.out.println("Data in ascending order:\n" + Arrays.toString(arrayBoth));
-                double medianBoth = calculateMedian(arrayBoth);
-                System.out.println("The median is " + medianBoth);
+                // Median
+                Arrays.sort(array);
+                System.out.println("Data in ascending order:\n" + Arrays.toString(array));
+                System.out.println("Median: " + calculateMedian(array));
+
+                // Mode
+                List<Double> modesAll = calculateMode(array);
+                if (modesAll.isEmpty()) System.out.println("No Mode found (all values unique).");
+                else System.out.println("Mode: " + modesAll);
                 break;
 
             default:
@@ -465,7 +477,7 @@ class Special_Numbers {
         System.out.println("6. Happy Number (19 : 1^2 + 9^2 = 82 -> 8^2 + 2^2 = 68 -> ... -> 1)");
         System.out.println("7. Prime Number (7) ");
         System.out.println("8. Factorial ");
-        System.out.println("9. Mean and Median");
+        System.out.println("9. Statistics (Mean, Median, Mode)");
         System.out.println("10. Fibonacci Sequence");
         System.out.println("11. Ugly Number");
         System.out.println("12. Number Conversion");
@@ -506,7 +518,7 @@ class Special_Numbers {
                     Factorial();
                     break;
                 case 9:
-                    Mean_Median();
+                    Statistics();
                     break;
                 case 10:
                     Fibonacci();
